@@ -1,13 +1,8 @@
 ﻿using LayeryDemo.BusinessEntities;
 using LayeryDemo.BusinessServices;
+using LayeryDemo.Presentation.WinForm.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LayeryDemo.Presentation.WinForm
@@ -44,13 +39,14 @@ namespace LayeryDemo.Presentation.WinForm
 
         private void RefreshTeachersList()
         {
-            var teachers = teacherService.GetAll();
+            lstTeacher.Items.Clear();
+            var teachers = teacherService.GetAll<TeacherModel>();
             lstTeacher.Items.AddRange(teachers.ToArray());
         }
 
         private void lstTeacher_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TeacherEntity selectedTeacher = teacherService.GetById(((TeacherEntity)lstTeacher.SelectedItem).Id, true, true);
+        {   
+            TeacherEntity selectedTeacher = teacherService.GetById(((TeacherModel)lstTeacher.SelectedItem).Id, true, true);
             lstStds.Items.Clear();
             lstStds.Items.AddRange(selectedTeacher.Standards.ToArray());
 

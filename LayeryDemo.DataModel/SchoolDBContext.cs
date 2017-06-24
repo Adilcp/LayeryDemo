@@ -14,6 +14,7 @@ namespace LayeryDemo.DataModel
         public SchoolDBContext()
             : base("name=SchoolDBContext")
         {
+            Database.SetInitializer<SchoolDBContext>(new SchoolDBInitializer());
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
